@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "stdio.h": "c",
+        "lualib.h": "c",
+        "lauxlib.h": "c",
+        "time.h": "c",
+        "lua.h": "c",
+        "lua.hpp": "c",
+        "string.h": "c"
+    }
+}

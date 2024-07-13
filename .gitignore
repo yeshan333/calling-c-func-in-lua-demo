@@ -1,0 +1,7 @@
+*.gz
+*.tar
+*/install/*
+*/doc/*
+*.o
+*.a
+*.so
