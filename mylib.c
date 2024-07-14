@@ -20,7 +20,7 @@ static int i_add(lua_State *L)
     // 设置函数返回值
     lua_pushnumber(L, a + b);
 
-    // 函数返回值的数量，在这里函数返回值为1
+    // 函数返回值的数量，在这里函数返回值为 1
     return 1;
 }
 
@@ -39,7 +39,7 @@ static int i_swap(lua_State *L)
 // 计算斐波拉契数列
 static int i_fib(lua_State *L)
 {
-    // lua_Integer长度为64位，防止溢出（事实上当n的值达到100左右即使64位也会发生溢出了）
+    // lua_Integer 长度为 64 位，防止溢出（事实上当 n 的值达到 100 左右即使 64 位也会发生溢出了）
     lua_Integer sum = 0;
     lua_Integer a = 0; // n - 2
     lua_Integer b = 0; // n - 1
@@ -78,23 +78,26 @@ static int i_time(lua_State *L)
 
 static luaL_Reg mylibs[] = {
     {"add", i_add},
-    {"sub", i_swap},
-    {"i_fib", i_fib},
-    {"i_time", i_time},
+    {"swap", i_swap},
+    {"fib_c", i_fib},
+    {"current_time", i_time},
     {NULL, NULL}};
 
 // 打开名为mylib的库，在Lua中使用require('mylib')可以调用mylib中的函数
 int luaopen_mylib(lua_State *L)
 {
-    // 对函数进行注册，之后在Lua中可以直接调用
-    // 在调用C函数时使用的全局函数名，第二个参数为实际C函数的指针。
-    lua_register(L, "add", i_add);
-    lua_register(L, "swap", i_swap);
-    lua_register(L, "fib_c", i_fib);
-    lua_register(L, "current_time", i_time);
-    return 0;
+    // 对函数进行注册，之后在 Lua 中可以直接调用
+    // 在调用 C 函数时使用的全局函数名，第二个参数为实际 C 函数的指针。
+    // 使用时直接 require('mylib')
+    
+    // lua_register(L, "add", i_add);
+    // lua_register(L, "swap", i_swap);
+    // lua_register(L, "fib_c", i_fib);
+    // lua_register(L, "current_time", i_time);
+    // return 0;
 
-    // const char *libName = "mylib";
-    // lua_register(L, libName, mylibs);
-    // return 1;
+    // 注册为一个模块
+    // 需要以 -- local mylib = require('mylib') mylib.xxx 的方式使用
+    luaL_newlib(L, mylibs);
+    return 1;
 }
