@@ -76,11 +76,21 @@ static int i_time(lua_State *L)
     return 1;
 }
 
+static int my_printer(lua_State *L)
+{
+    size_t len;
+    const char* s = lua_tolstring(L, 1, &len);
+    printf("my printer's output: %s, length: %ld\n", s, len);
+    // lua_pushstring(L, s);
+    return 0;
+}
+
 static luaL_Reg mylibs[] = {
     {"add", i_add},
     {"swap", i_swap},
     {"fib_c", i_fib},
     {"current_time", i_time},
+    {"my_printer", my_printer},
     {NULL, NULL}};
 
 // 打开名为mylib的库，在Lua中使用require('mylib')可以调用mylib中的函数
