@@ -32,12 +32,15 @@ test_cmp2: compile_cmp2_so
 # -L 指定动态库 .so 或 .a 静态库搜索路径
 # -llua 链接到名为 lua 的库. gcc 会在 -L 指定的目录中查找这个库. 通常是 .so 或 .a 文件
 compile_cmp1_so:
-	gcc mylib.c -Wall -fPIC -shared -o mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_1)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_1)/src -llua
+	make -p $(CURDIR)/build
+	gcc mylib.c -Wall -fPIC -shared -o build/mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_1)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_1)/src -llua
 
 compile_cmp2_so:
-	gcc mylib.c -Wall -fPIC -shared -o mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_2)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_2)/src -llua
+	make -p $(CURDIR)/build
+	gcc mylib.c -Wall -fPIC -shared -o build/mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_2)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_2)/src -llua
 
 clean:
 	rm -f mylib.so
+	rm -f *.so
 	rm -f $(CURDIR)/*.tar.gz
 	rm -rf lua-*

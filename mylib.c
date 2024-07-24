@@ -79,8 +79,8 @@ static int i_time(lua_State *L)
 static int my_printer(lua_State *L)
 {
     size_t len;
-    const char* s = lua_tolstring(L, 1, &len);
-    printf("my printer's output: %s, length: %ld\n", s, len);
+    const uint8_t* s = (const uint8_t*)luaL_tolstring(L, 1, &len);
+    printf("my printer's output: %s, length: %zu\n", s, len);
     // lua_pushstring(L, s);
     return 0;
 }
@@ -96,6 +96,7 @@ static luaL_Reg mylibs[] = {
 // 打开名为mylib的库，在Lua中使用require('mylib')可以调用mylib中的函数
 int luaopen_mylib(lua_State *L)
 {
+    luaL_checkversion(L);
     // 对函数进行注册，之后在 Lua 中可以直接调用
     // 在调用 C 函数时使用的全局函数名，第二个参数为实际 C 函数的指针。
     // 使用时直接 require('mylib')
