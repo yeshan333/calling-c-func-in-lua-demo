@@ -6,6 +6,22 @@
 # 安装两个 lua 版本
 make install_lua
 
+# 编译自定义 C 库
+make compile_cmp1_so
+make compile_cmp2_so
+# 测试版本 1，lua ABI 表现
+make test_cmp1
+# 测试版本 2，lua ABI 表现
+make test_cmp2
+```
+
+使用 xmake 编译
+
+```shell
+# 指定 lua 版本进行编译
+xmake f --lua_version=5.4.6 -v
+xmake -v
+
 # 测试版本 1，lua ABI 表现
 make test_cmp1
 # 测试版本 2，lua ABI 表现

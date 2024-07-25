@@ -19,11 +19,11 @@ install_cmp2_lua:
 	cd $(CURDIR)/$(LUA_CMP_VERSION_2) && make all
 	cd $(CURDIR)/$(LUA_CMP_VERSION_2) && make local
 
-test_cmp1: compile_cmp1_so
+test_cmp1:
 	echo "Testing lua version: $(LUA_CMP_VERSION_1)"
 	$(CURDIR)/$(LUA_CMP_VERSION_1)/install/bin/lua test_printer.lua
 
-test_cmp2: compile_cmp2_so
+test_cmp2:
 	echo "Testing lua version: $(LUA_CMP_VERSION_2)"
 	$(CURDIR)/$(LUA_CMP_VERSION_2)/install/bin/lua test_printer.lua
 

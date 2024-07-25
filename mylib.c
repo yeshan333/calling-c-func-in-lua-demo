@@ -79,7 +79,9 @@ static int i_time(lua_State *L)
 static int my_printer(lua_State *L)
 {
     size_t len;
-    const uint8_t* s = (const uint8_t*)luaL_tolstring(L, 1, &len);
+    const int arg1 = luaL_checkinteger(L, 1);
+    printf("arg1: %d\n", arg1);
+    const uint8_t* s = (const uint8_t*)luaL_tolstring(L, 2, &len);
     printf("my printer's output: %s, length: %zu\n", s, len);
     // lua_pushstring(L, s);
     return 0;
