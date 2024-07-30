@@ -10,10 +10,11 @@ make install_lua
 
 # Compile custom C libraries
 make compile_cmp1_so
-make compile_cmp2_so
 # Test the difference of version 1 of lua 5.4.7, lua C API `luaL_tolstring`
 make test_cmp1
+
 # Test the difference of version 2 of lua 5.4.6, lua C API `luaL_tolstring`
+make compile_cmp2_so # compile so
 make test_cmp2
 ```
 
