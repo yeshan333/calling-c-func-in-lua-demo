@@ -3,6 +3,10 @@ all: compile
 LUA_CMP_VERSION_1=lua-5.4.7
 LUA_CMP_VERSION_2=lua-5.4.6
 
+.PHONY: prepare_dirs
+prepare_build_dirs:
+	mkdir -p build
+
 install_lua: install_cmp2_lua
 	curl -L -R -O https://www.lua.org/ftp/$(LUA_CMP_VERSION_1).tar.gz
 	tar zxvf $(LUA_CMP_VERSION_1).tar.gz
@@ -31,12 +35,10 @@ test_cmp2:
 # -I 指定头文件搜索路径
 # -L 指定动态库 .so 或 .a 静态库搜索路径
 # -llua 链接到名为 lua 的库. gcc 会在 -L 指定的目录中查找这个库. 通常是 .so 或 .a 文件
-compile_cmp1_so:
-	make -p $(CURDIR)/build
+compile_cmp1_so: prepare_build_dirs
 	gcc mylib.c -Wall -fPIC -shared -o build/mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_1)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_1)/src -llua
 
-compile_cmp2_so:
-	make -p $(CURDIR)/build
+compile_cmp2_so: prepare_build_dirs
 	gcc mylib.c -Wall -fPIC -shared -o build/mylib.so -I$(CURDIR)/$(LUA_CMP_VERSION_2)/install/lib -L$(CURDIR)/$(LUA_CMP_VERSION_2)/src -llua
 
 clean:
